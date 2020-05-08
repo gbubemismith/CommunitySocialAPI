@@ -1,5 +1,9 @@
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using CommunitySocial.API.Data;
+using CommunitySocial.API.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,10 +15,12 @@ namespace CommunitySocial.API.Controllers
     public class UsersController : ControllerBase
     {
         private readonly ISocialRepository _repo;
+        private readonly IMapper _mapper;
 
-        public UsersController(ISocialRepository repo)
+        public UsersController(ISocialRepository repo, IMapper mapper)
         {
             _repo = repo;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -22,7 +28,9 @@ namespace CommunitySocial.API.Controllers
         {
             var users = await _repo.GetUsers();
 
-            return Ok(users);
+            var usersToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users);
+
+            return Ok(usersToReturn);
         }
 
         [HttpGet("{id}")]
@@ -30,7 +38,9 @@ namespace CommunitySocial.API.Controllers
         {
             var user = await _repo.GetUser(id);
 
-            return Ok(user);
+            var userToReturn = _mapper.Map<UserForDetailsDto>(user);
+
+            return Ok(userToReturn);
         }
     }
 }
