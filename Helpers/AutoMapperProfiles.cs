@@ -30,6 +30,6 @@ namespace CommunitySocial.API.Helpers
             CreateMap<PhotoForCreationDto, Photo>();
 
             CreateMap<UserForRegisterDto, User>();
-        }
+        } 
     }
 }

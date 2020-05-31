@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using AutoMapper;
 using CommunitySocial.API.Data;
 using CommunitySocial.API.Dtos;
+using CommunitySocial.API.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CommunitySocial.API.Controllers
 {
-    [Authorize]
+    [ServiceFilter(typeof(LogUserActivity))]
+    [Authorize] 
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase

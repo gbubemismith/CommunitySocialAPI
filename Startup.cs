@@ -52,7 +52,8 @@ namespace CommunitySocial.API
                             ValidateAudience = false
                         };
                     });
-            
+                    
+            services.AddScoped<LogUserActivity>();
 
             
         }
