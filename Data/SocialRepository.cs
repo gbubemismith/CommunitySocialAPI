@@ -115,7 +115,7 @@ namespace CommunitySocial.API.Data
 
         public async Task<bool> SaveAll()
         {
-            //if 0 returns false else true where 0 means no chnages happened
+            //if 0 returns false else true, where 0 means no changes happened
             return await _context.SaveChangesAsync() > 0;
         }
 
